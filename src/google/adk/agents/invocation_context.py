@@ -206,6 +206,15 @@ class InvocationContext(BaseModel):
   canonical_tools_cache: Optional[list[BaseTool]] = None
   """The cache of canonical tools for this invocation."""
 
+  metadata: Optional[dict[str, Any]] = None
+  """Per-request metadata passed from Runner.run_async().
+
+  This field allows passing arbitrary metadata that can be accessed during
+  the invocation lifecycle, particularly in callbacks like before_model_callback.
+  Common use cases include passing user_id, trace_id, memory context keys, or
+  other request-specific context that needs to be available during processing.
+  """
+
   _invocation_cost_manager: _InvocationCostManager = PrivateAttr(
       default_factory=_InvocationCostManager
   )
