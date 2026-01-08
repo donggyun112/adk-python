@@ -207,12 +207,14 @@ class InvocationContext(BaseModel):
   """The cache of canonical tools for this invocation."""
 
   metadata: Optional[dict[str, Any]] = None
-  """Per-request metadata passed from Runner.run_async().
+  """Per-request metadata passed from Runner entry points.
 
   This field allows passing arbitrary metadata that can be accessed during
   the invocation lifecycle, particularly in callbacks like before_model_callback.
   Common use cases include passing user_id, trace_id, memory context keys, or
   other request-specific context that needs to be available during processing.
+
+  Supported entry points: run(), run_async(), run_live(), run_debug().
   """
 
   _invocation_cost_manager: _InvocationCostManager = PrivateAttr(
